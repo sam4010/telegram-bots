@@ -149,7 +149,7 @@ async def handle_video_download(update: Update, context: ContextTypes.DEFAULT_TY
 def download_media(url: str) -> str:
     out_template = os.path.join(TEMP_DIR, "%(id)s.%(ext)s")
 
-    ydl_opts = {
+        ydl_opts = {
         'format': 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][ext=mp4]/bestvideo[height<=720]+bestaudio/best',
         'ffmpeg_location': FFMPEG_PATH,
         'merge_output_format': 'mp4',
@@ -157,6 +157,11 @@ def download_media(url: str) -> str:
         'quiet': True,
         'no_warnings': True,
         'nocheckcertificate': True,
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['android', 'ios']
+            }
+        },
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
