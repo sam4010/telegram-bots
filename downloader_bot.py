@@ -158,8 +158,9 @@ def download_media(url: str) -> str:
         'no_warnings': True,
         'nocheckcertificate': True,
         'extractor_args': {
-            'youtube': {
-                'player_client': ['android', 'ios']
+                'youtube': {
+                'player_client': ['android', 'ios'],
+                'player_skip': ['webpage', 'configs']
             }
         },
     }
